@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.*?>
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700"
+      prefWidth="1200" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="wire.controllers.Controller">
+
+    <VBox alignment="TOP_CENTER">
+        <VBox.margin>
+            <Insets top="500"/>
+        </VBox.margin>
+        <Line endX="1200" stroke="#4e7546" strokeWidth="2.0"/>
+    </VBox>
+
+    <GridPane gridLinesVisible="true">
+        <columnConstraints>
+            <ColumnConstraints maxWidth="20.0" minWidth="20.0" prefWidth="20.0"/>
+            <ColumnConstraints maxWidth="50.0" minWidth="20.0" prefWidth="100.0"/>
+            <ColumnConstraints maxWidth="20.0" minWidth="20.0" prefWidth="100.0"/>
+            <ColumnConstraints maxWidth="20.0" minWidth="20.0" prefWidth="100.0"/>
+            <ColumnConstraints maxWidth="100.0" minWidth="20.0" prefWidth="100.0"/>
+            <ColumnConstraints maxWidth="200.0" minWidth="20.0" prefWidth="200.0"/>
+
+            <ColumnConstraints maxWidth="50.0" minWidth="20.0" prefWidth="100.0"/>
+            <ColumnConstraints maxWidth="20.0" minWidth="20.0" prefWidth="100.0"/>
+            <ColumnConstraints maxWidth="20.0" minWidth="20.0" prefWidth="100.0"/>
+            <ColumnConstraints maxWidth="100.0" minWidth="20.0" prefWidth="100.0"/>
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints maxHeight="20.0" minHeight="20.0"/>
+            <RowConstraints maxHeight="20.0" minHeight="20.0"/>
+            <RowConstraints maxHeight="10.0" minHeight="10.0"/>
+            <RowConstraints maxHeight="20.0" minHeight="20.0"/>
+            <RowConstraints maxHeight="10.0" minHeight="10.0"/>
+            <RowConstraints maxHeight="20.0" minHeight="20.0"/>
+            <RowConstraints maxHeight="12.0" minHeight="12.0"/>
+            <RowConstraints maxHeight="20.0" minHeight="20.0"/>
+        </rowConstraints>
+
+        <Label text="R" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.halignment="CENTER"
+               GridPane.valignment="CENTER">
+            <font>
+                <Font size="17"/>
+            </font>
+        </Label>
+        <Label text="=" GridPane.columnIndex="2" GridPane.rowIndex="1" GridPane.halignment="CENTER"
+               GridPane.valignment="CENTER">
+            <font>
+                <Font size="17"/>
+            </font>
+        </Label>
+        <TextField fx:id="resistanceTextField" prefHeight="26.0" prefWidth="100.0" text="0.004"
+                   GridPane.columnIndex="4" GridPane.rowIndex="1"/>
+
+
+        <Label text="I" GridPane.columnIndex="1" GridPane.rowIndex="3" GridPane.halignment="CENTER"
+               GridPane.valignment="CENTER">
+            <font>
+                <Font size="17"/>
+            </font>
+        </Label>
+        <Label text="=" GridPane.columnIndex="2" GridPane.rowIndex="3" GridPane.halignment="CENTER"
+               GridPane.valignment="CENTER">
+            <font>
+                <Font size="17"/>
+            </font>
+        </Label>
+        <TextField fx:id="amperageTextField" prefHeight="26.0" prefWidth="100.0" text="0.004"
+                   GridPane.columnIndex="4" GridPane.rowIndex="3"/>
+
+
+        <Label text="L" GridPane.columnIndex="1" GridPane.rowIndex="5" GridPane.halignment="CENTER"
+               GridPane.valignment="CENTER">
+            <font>
+                <Font size="17"/>
+            </font>
+        </Label>
+        <Label text="=" GridPane.columnIndex="2" GridPane.rowIndex="5" GridPane.halignment="CENTER"
+               GridPane.valignment="CENTER">
+            <font>
+                <Font size="17"/>
+            </font>
+        </Label>
+        <TextField fx:id="lengthOfWireTextField" prefHeight="26.0" prefWidth="100.0" text="1"
+                   GridPane.columnIndex="4" GridPane.rowIndex="5"/>
+
+
+        <HBox GridPane.columnIndex="6" GridPane.rowIndex="1">
+            <GridPane.margin>
+                <Insets left="5"/>
+            </GridPane.margin>
+            <Label text="T">
+                <font>
+                    <Font size="17"/>
+                </font>
+            </Label>
+            <VBox>
+                <Label text=" " alignment="BOTTOM_RIGHT">
+                    <font>
+                        <Font size="8.0"/>
+                    </font>
+                </Label>
+                <Label alignment="BOTTOM_RIGHT" text="провод">
+                    <font>
+                        <Font size="8.0"/>
+                    </font>
+                </Label>
+            </VBox>
+        </HBox>
+
+
+        <Label text="=" GridPane.columnIndex="7" GridPane.rowIndex="1" GridPane.halignment="CENTER"
+               GridPane.valignment="CENTER">
+            <font>
+                <Font size="17"/>
+            </font>
+        </Label>
+        <TextField fx:id="temperatureOfWireTextField" prefHeight="26.0" prefWidth="100.0" text="0.004"
+                   GridPane.columnIndex="9" GridPane.rowIndex="1"/>
+
+
+        <HBox GridPane.columnIndex="6" GridPane.rowIndex="3">
+            <GridPane.margin>
+                <Insets left="5"/>
+            </GridPane.margin>
+            <Label text="T">
+                <font>
+                    <Font size="17"/>
+                </font>
+            </Label>
+            <VBox>
+                <Label text=" " alignment="BOTTOM_RIGHT">
+                    <font>
+                        <Font size="8.0"/>
+                    </font>
+                </Label>
+                <Label alignment="BOTTOM_RIGHT" text="воздух">
+                    <font>
+                        <Font size="8.0"/>
+                    </font>
+                </Label>
+            </VBox>
+        </HBox>
+
+        <Label text="=" GridPane.columnIndex="7" GridPane.rowIndex="3" GridPane.halignment="CENTER"
+               GridPane.valignment="CENTER">
+            <font>
+                <Font size="17"/>
+            </font>
+        </Label>
+
+        <TextField fx:id="temperatureOfTheAirTextField" prefHeight="26.0" prefWidth="100.0" text="0.004"
+                   GridPane.columnIndex="9" GridPane.rowIndex="3"/>
+
+        <Label text="d" GridPane.columnIndex="6" GridPane.rowIndex="5" GridPane.halignment="CENTER"
+               GridPane.valignment="CENTER">
+            <font>
+                <Font size="17"/>
+            </font>
+        </Label>
+        <Label text="=" GridPane.columnIndex="7" GridPane.rowIndex="5" GridPane.halignment="CENTER"
+               GridPane.valignment="CENTER">
+            <font>
+                <Font size="17"/>
+            </font>
+        </Label>
+        <TextField fx:id="diameterOfWireTextField" prefHeight="26.0" prefWidth="100.0" text="0.5"
+                   GridPane.columnIndex="9" GridPane.rowIndex="5"/>
+
+
+        <Button onAction="#calculateButton" prefWidth="100" text="Вычислить" GridPane.halignment="CENTER" GridPane.valignment="CENTER" GridPane.rowIndex="7" GridPane.columnIndex="9"/>
+    </GridPane>
+
+</VBox>
