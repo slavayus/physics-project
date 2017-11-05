@@ -25,7 +25,7 @@
                 <directory>src/main/java/wire/view/</directory>
                 <targetPath>wire/view</targetPath>
                 <includes>
-                    <include>*.fxml</include>
+                    <include>*</include>
                 </includes>
             </resource>
         </resources>

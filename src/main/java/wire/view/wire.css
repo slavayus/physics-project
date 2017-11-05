@@ -1,0 +1,7 @@
+.textField {
+    -fx-border-width: 1.2;
+    -fx-border-radius: 3;
+    -fx-border-color: #4E7546;
+    -fx-background-color: #ffffff;
+    -fx-faint-focus-color: transparent;
+}
