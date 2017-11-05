@@ -8,3 +8,19 @@
     -fx-pref-height: 26;
     -fx-pref-width: 100
 }
+
+.button:hover{
+    -fx-border-width: 1.2;
+    -fx-border-radius: 3;
+    -fx-border-color: #4E7546;
+}
+
+/*
+.button:focused{
+    -fx-border-width: 1.2;
+    -fx-border-radius: 3;
+    -fx-border-color: #4E7546;
+    -fx-faint-focus-color: transparent;
+    -fx-background-color: transparent;
+}
+*/
