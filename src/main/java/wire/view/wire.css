@@ -4,4 +4,7 @@
     -fx-border-color: #4E7546;
     -fx-background-color: #ffffff;
     -fx-faint-focus-color: transparent;
+    -fx-cursor: hand;
+    -fx-pref-height: 26;
+    -fx-pref-width: 100
 }
