@@ -17,13 +17,13 @@
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700"
       prefWidth="1200" stylesheets="/wire/view/wire.css" xmlns="http://javafx.com/javafx/8.0.121"
       xmlns:fx="http://javafx.com/fxml/1" fx:controller="wire.controllers.Controller">
-    <VBox alignment="TOP_CENTER">
+    <VBox alignment="TOP_CENTER" minHeight="400" maxHeight="400">
         <VBox.margin>
             <Insets top="100"/>
         </VBox.margin>
-        <Rectangle fx:id="wire" fill="black" height="3" width="500" x="100" y="10">
+        <Rectangle fx:id="wire" fill="black" height="2" width="500" x="100" y="10">
             <effect>
-                <DropShadow color="#400000" radius="2"/>
+                <DropShadow fx:id="dropShadowForWire" color="#ff0000" radius="52"/>
             </effect>
         </Rectangle>
     </VBox>
@@ -42,9 +42,6 @@
     <!--</Text>-->
 
     <VBox alignment="TOP_CENTER">
-        <VBox.margin>
-            <Insets top="400"/>
-        </VBox.margin>
         <Line endX="1200" stroke="#4e7546" strokeWidth="2.0">
             <effect>
                 <DropShadow color="GRAY" offsetX="2.0" offsetY="2.0"/>
@@ -143,7 +140,7 @@
                 <Font size="17"/>
             </font>
         </Label>
-        <Label fx:id="messageCheckInputData" GridPane.columnIndex="1" GridPane.columnSpan="11" GridPane.rowIndex="8">
+        <Label fx:id="messageInputData" GridPane.columnIndex="1" GridPane.columnSpan="11" GridPane.rowIndex="8">
             <font>
                 <Font size="17"/>
             </font>
@@ -256,9 +253,9 @@
                 <Font size="17"/>
             </font>
         </Label>
-        <TextField fx:id="diameterOfWireTextField" styleClass="textField" text="0.5" GridPane.columnIndex="9"
+        <TextField fx:id="diameterOfWireTextField" styleClass="textField" text="0.05" GridPane.columnIndex="9"
                    GridPane.rowIndex="5"/>
-        <Label text="мм" GridPane.columnIndex="10" GridPane.halignment="LEFT" GridPane.rowIndex="5"
+        <Label text="м" GridPane.columnIndex="10" GridPane.halignment="LEFT" GridPane.rowIndex="5"
                GridPane.valignment="CENTER">
             <font>
                 <Font size="17"/>
