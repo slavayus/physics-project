@@ -5,45 +5,52 @@ import static java.lang.StrictMath.pow;
 import static java.lang.StrictMath.sqrt;
 
 public class Checker {
-    private final static int LONG_TERM_PERMISSIBLE_TEMPERATURE = 70;
-    private final static int MAX_DIAMETER = 1;
+    private final static int LONG_TERM_PERMISSIBLE_TEMPERATURE = 1085;
     private final static double MIN_TEMPERATURE = -273.15;
 
-    private double resistance;
-    private double diameterOfWire;
-    private double amperage;
-    private double startTemperatureOfWire;
+    private final double lengthOfWire;
+    private final double diameterOfWire;
+    private final double amperage;
+    private final double startTemperatureOfWire;
 
-    public Checker(double startTemperatureOfWire, double amperage, double diameterOfWire, double resistance) {
+    public Checker(double startTemperatureOfWire, double amperage, double diameterOfWire, double lengthOfWire) {
         this.startTemperatureOfWire = startTemperatureOfWire;
         this.amperage = amperage;
         this.diameterOfWire = diameterOfWire;
-        this.resistance = resistance;
+        this.lengthOfWire = lengthOfWire;
     }
 
     public ErrorCheckInputData checkInputData() {
         ErrorCheckInputData errorCheckInputData = ErrorCheckInputData.ALL_IS_WELL;
         int thermalConductivity = getThermalConductivity();
-        double continuousAdmissibleAmperage = sqrt((thermalConductivity * ((PI * pow(diameterOfWire, 2)) / 4) * LONG_TERM_PERMISSIBLE_TEMPERATURE) / (resistance));
+        double continuousAdmissibleAmperage = sqrt((thermalConductivity * ((PI * pow(diameterOfWire, 2)) / 4) * LONG_TERM_PERMISSIBLE_TEMPERATURE) / (5));
 
 
-        if (continuousAdmissibleAmperage < amperage) {
-            errorCheckInputData = ErrorCheckInputData.ERROR_AMPERAGE_IS_TO_ABOVE;
+//        if (continuousAdmissibleAmperage < amperage) {
+//            errorCheckInputData = ErrorCheckInputData.ERROR_AMPERAGE_IS_TO_ABOVE;
+//        }
+
+
+//        if (LONG_TERM_PERMISSIBLE_TEMPERATURE < startTemperatureOfWire) {
+//            errorCheckInputData = ErrorCheckInputData.ERROR_TEMPERATURE_OF_WIRE_IS_TO_ABOVE;
+//        }
+
+        if(amperage<0){
+            errorCheckInputData = ErrorCheckInputData.ERROR_AMPERAGE_IS_TOO_LOW;
         }
-
-
-        if (LONG_TERM_PERMISSIBLE_TEMPERATURE < startTemperatureOfWire) {
-            errorCheckInputData = ErrorCheckInputData.ERROR_TEMPERATURE_OF_WIRE_IS_TO_ABOVE;
-        }
-
 
         if (startTemperatureOfWire < MIN_TEMPERATURE) {
             errorCheckInputData = ErrorCheckInputData.ERROR_TEMPERATURE_OF_WIRE_IS_TO_LOW;
         }
 
 
-        if (diameterOfWire > MAX_DIAMETER) {
+        if(lengthOfWire<=0){
             errorCheckInputData = ErrorCheckInputData.ERROR_LENGTH_OF_WIRE;
+        }
+
+
+        if (diameterOfWire <= 0) {
+            errorCheckInputData = ErrorCheckInputData.ERROR_DIAMETER_OF_WIRE_IS_TO_LOW;
         }
 
         return errorCheckInputData;
