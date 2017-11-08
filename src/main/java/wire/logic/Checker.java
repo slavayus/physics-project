@@ -4,26 +4,14 @@ import static java.lang.StrictMath.PI;
 import static java.lang.StrictMath.pow;
 import static java.lang.StrictMath.sqrt;
 
-public class Checker {
-    private final static int LONG_TERM_PERMISSIBLE_TEMPERATURE = 1085;
-    private final static double MIN_TEMPERATURE = -273.15;
-
-    private final double lengthOfWire;
-    private final double diameterOfWire;
-    private final double amperage;
-    private final double startTemperatureOfWire;
-
-    public Checker(double startTemperatureOfWire, double amperage, double diameterOfWire, double lengthOfWire) {
-        this.startTemperatureOfWire = startTemperatureOfWire;
-        this.amperage = amperage;
-        this.diameterOfWire = diameterOfWire;
-        this.lengthOfWire = lengthOfWire;
+class Checker {
+    private Checker() {
     }
 
-    public ErrorCheckInputData checkInputData() {
+    static ErrorCheckInputData checkData(double temperatureOfWire, double amperage, double diameterOfWire, double lengthOfWire, PhysicsConstants material) {
         ErrorCheckInputData errorCheckInputData = ErrorCheckInputData.ALL_IS_WELL;
-        int thermalConductivity = getThermalConductivity();
-        double continuousAdmissibleAmperage = sqrt((thermalConductivity * ((PI * pow(diameterOfWire, 2)) / 4) * LONG_TERM_PERMISSIBLE_TEMPERATURE) / (5));
+        int thermalConductivity = getThermalConductivity(temperatureOfWire);
+        double continuousAdmissibleAmperage = sqrt((thermalConductivity * ((PI * pow(diameterOfWire, 2)) / 4) * material.getMaxTemperature()) / (5));
 
 
 //        if (continuousAdmissibleAmperage < amperage) {
@@ -31,20 +19,20 @@ public class Checker {
 //        }
 
 
-        if (LONG_TERM_PERMISSIBLE_TEMPERATURE < startTemperatureOfWire) {
+        if (material.getMaxTemperature() < temperatureOfWire) {
             errorCheckInputData = ErrorCheckInputData.ERROR_TEMPERATURE_OF_WIRE_IS_TO_ABOVE;
         }
 
-        if(amperage<0){
+        if (amperage < 0) {
             errorCheckInputData = ErrorCheckInputData.ERROR_AMPERAGE_IS_TOO_LOW;
         }
 
-        if (startTemperatureOfWire < MIN_TEMPERATURE) {
+        if (temperatureOfWire < material.getMinTemperature()) {
             errorCheckInputData = ErrorCheckInputData.ERROR_TEMPERATURE_OF_WIRE_IS_TO_LOW;
         }
 
 
-        if(lengthOfWire<=0){
+        if (lengthOfWire <= 0) {
             errorCheckInputData = ErrorCheckInputData.ERROR_LENGTH_OF_WIRE;
         }
 
@@ -56,7 +44,7 @@ public class Checker {
         return errorCheckInputData;
     }
 
-    private int getThermalConductivity() {
+    private static int getThermalConductivity(double startTemperatureOfWire) {
         int thermalConductivity = 401;
 
         if (startTemperatureOfWire >= 125 && startTemperatureOfWire < 225) {

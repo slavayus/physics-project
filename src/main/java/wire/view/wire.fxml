@@ -21,7 +21,7 @@
         <VBox.margin>
             <Insets top="100"/>
         </VBox.margin>
-        <Rectangle fx:id="wire" fill="black" height="1" width="500" x="100" y="10">
+        <Rectangle fx:id="wireRectangle" fill="black" height="1" width="500" x="100" y="10">
             <effect>
                 <DropShadow fx:id="dropShadowForWire" color="#0000FF" radius="52"/>
             </effect>

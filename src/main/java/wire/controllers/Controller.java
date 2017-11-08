@@ -6,10 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.shape.Rectangle;
-import wire.logic.Temperature;
-import wire.logic.Checker;
-import wire.logic.ErrorCheckInputData;
-import wire.logic.ErrorTransferInputData;
+import wire.logic.*;
 
 public class Controller {
 
@@ -26,7 +23,7 @@ public class Controller {
     public TextField diameterOfWireTextField;
 
     @FXML
-    public Rectangle wire;
+    public Rectangle wireRectangle;
 
     @FXML
     public Label messageInputData;
@@ -41,7 +38,6 @@ public class Controller {
     private double lengthOfWire;
     private double startTemperatureOfWire;
     private double diameterOfWire;
-    private Task<Void> task;
 
     public void initialize() {
         calculateButton();
@@ -52,53 +48,17 @@ public class Controller {
 
         if (errorTransferInputData == ErrorTransferInputData.ALL_IS_WELL) {
             setGoodMessage(errorTransferInputData.getMessage());
-            doRefactorOfWire();
+            drawWire();
         } else {
             setErrorMessage(errorTransferInputData.getMessage());
         }
     }
 
-    private void doRefactorOfWire() {
-        Checker checker = new Checker(startTemperatureOfWire, amperage, diameterOfWire, lengthOfWire);
-        ErrorCheckInputData errorCheckInputData = checker.checkInputData();
-        if (errorCheckInputData == ErrorCheckInputData.ALL_IS_WELL) {
-            drawWire();
-        } else {
-            setErrorMessage(errorCheckInputData.getMessage());
-            dropWire();
-        }
-    }
+    private Task<Void> task;
 
     private void drawWire() {
-        setWireHeight();
-
-        if (task != null) {
-            task.cancel();
-        }
-
-        task = new Temperature(dropShadowForWire, amperage, lengthOfWire, startTemperatureOfWire, diameterOfWire);
-        currentTemperatureLabel.textProperty().bind(task.messageProperty());
-
-        Thread thread = new Thread(task);
-        thread.setDaemon(true);
-        thread.start();
-    }
-
-    private void setWireHeight() {
-        if (diameterOfWire <= 0.01) {
-            wire.setHeight(1);
-        }else{
-            if(diameterOfWire<1){
-                wire.setHeight(50*diameterOfWire);
-            }else {
-                wire.setHeight(50);
-            }
-        }
-
-    }
-
-    private void dropWire() {
-        System.out.println("YEE");
+        Wire wire = new Wire(task);
+        task = wire.drawWire(dropShadowForWire, startTemperatureOfWire, amperage, diameterOfWire, lengthOfWire, currentTemperatureLabel, wireRectangle, messageInputData, PhysicsConstants.COPPER);
     }
 
     private ErrorTransferInputData transferInputData() {
