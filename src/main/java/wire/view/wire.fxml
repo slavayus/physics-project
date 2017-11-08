@@ -23,7 +23,7 @@
         </VBox.margin>
         <Rectangle fx:id="wire" fill="black" height="1" width="500" x="100" y="10">
             <effect>
-                <DropShadow fx:id="dropShadowForWire" color="#ff0000" radius="52"/>
+                <DropShadow fx:id="dropShadowForWire" color="#0000FF" radius="52"/>
             </effect>
         </Rectangle>
     </VBox>

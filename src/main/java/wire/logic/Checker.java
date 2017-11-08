@@ -31,9 +31,9 @@ public class Checker {
 //        }
 
 
-//        if (LONG_TERM_PERMISSIBLE_TEMPERATURE < startTemperatureOfWire) {
-//            errorCheckInputData = ErrorCheckInputData.ERROR_TEMPERATURE_OF_WIRE_IS_TO_ABOVE;
-//        }
+        if (LONG_TERM_PERMISSIBLE_TEMPERATURE < startTemperatureOfWire) {
+            errorCheckInputData = ErrorCheckInputData.ERROR_TEMPERATURE_OF_WIRE_IS_TO_ABOVE;
+        }
 
         if(amperage<0){
             errorCheckInputData = ErrorCheckInputData.ERROR_AMPERAGE_IS_TOO_LOW;

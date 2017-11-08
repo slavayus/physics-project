@@ -8,7 +8,6 @@ import java.util.Date;
 
 import static java.lang.StrictMath.PI;
 import static java.lang.StrictMath.pow;
-import static java.lang.StrictMath.tan;
 
 public class Temperature extends Task<Void> {
     private static final int SPECIFIC_HEAT_OF_COPPER = 381;
@@ -47,7 +46,7 @@ public class Temperature extends Task<Void> {
         double first = pow(amperage, 2) * resistance * duration;
         double second = getThermalConductivity() * surfaceArea * duration;
         double third = weight * SPECIFIC_HEAT_OF_COPPER;
-        currentTemperature = startTemperatureOfWire + first / (third + second);
+        currentTemperature = startTemperatureOfWire + Math.abs(first / (third + second));
         updateMessage(String.valueOf(currentTemperature));
     }
 
@@ -79,26 +78,40 @@ public class Temperature extends Task<Void> {
                     break;
                 }
 
+
                 calculateTemperature();
+                setDropShadowForWire();
 
-//                try {
-//                    Thread.sleep(1000);
-//                } catch (InterruptedException e) {
-//                    System.out.println("YEE");
-//                }
-                if (currentTemperature >= 20) {
-                    dropShadowForWire.setRadius(currentTemperature - 18);
-                    int colorValue = (int) (50 + (currentTemperature - 20) * 4.1);
-                    dropShadowForWire.setColor(Color.rgb(colorValue, 0, 0, 1));
-                } else {
-                    dropShadowForWire.setRadius(2);
-                    dropShadowForWire.setColor(Color.rgb(10, 0, 0, 1));
-                }
-
+                Thread.sleep(100);
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
         return null;
+    }
+
+    private void setDropShadowForWire() {
+        double newRadius;
+        Color color;
+
+        if (currentTemperature >= 0) {
+            newRadius = 50f / 1085f * currentTemperature;
+
+            int redColorValue = (int) (255f / 1085f * currentTemperature);
+            color = Color.rgb(redColorValue, 0, 0, 1);
+        } else {
+            if (currentTemperature < 0) {
+                newRadius = Math.abs(50f / 273.15f * currentTemperature);
+                int blueColorValue = (int) Math.abs(255f / 273.15f * currentTemperature);
+
+                color = Color.rgb(0, 0, blueColorValue, 1);
+            } else {
+                newRadius = 2;
+                color = Color.rgb(10, 0, 0, 1);
+            }
+        }
+
+        dropShadowForWire.setRadius(newRadius);
+        dropShadowForWire.setColor(color);
     }
 }
