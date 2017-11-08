@@ -10,13 +10,13 @@ public enum ErrorCheckInputData {
     ERROR_LENGTH_OF_WIRE {
         @Override
         public String getMessage() {
-            return "Ошибка в поле ввода: длина проводника";
+            return "Длина проводника должна быть положительным числом";
         }
     },
     ERROR_TEMPERATURE_OF_WIRE_IS_TO_ABOVE {
         @Override
         public String getMessage() {
-            return "Температура проводника слишком высока(макс: 70)";
+            return "Температура проводника выше допустимого";
         }
     },
     ALL_IS_WELL {

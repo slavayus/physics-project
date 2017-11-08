@@ -3,40 +3,123 @@ package wire.logic;
 import javafx.concurrent.Task;
 import javafx.scene.control.Label;
 import javafx.scene.effect.DropShadow;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
-public class Wire {
-    private Task<Void> task;
+public class Wire extends Task<Void> {
 
-    public Wire(Task<Void> task) {
-        this.task = task;
-    }
+    private final DropShadow dropShadowForWire;
+    private final Rectangle wireRectangle;
+    private final double amperage;
+    private final double lengthOfWire;
+    private final double diameterOfWire;
+    private final double startTemperatureOfWire;
+    private final PhysicsConstants material;
 
-    public Task<Void> drawWire(DropShadow dropShadowForWire, double startTemperatureOfWire, double amperage, double diameterOfWire, double lengthOfWire, Label currentTemperatureLabel, Rectangle wire, Label messageInputData, PhysicsConstants material) {
-        setWireHeight(diameterOfWire, wire);
 
-        if (task != null) {
-            task.cancel();
-        }
+    public Wire(DropShadow dropShadowForWire, double amperage, double lengthOfWire, double startTemperatureOfWire, double diameterOfWire, PhysicsConstants material, Rectangle wireRectangle, Label messageInputData) {
+        this.dropShadowForWire = dropShadowForWire;
+        this.wireRectangle = wireRectangle;
+        this.amperage = amperage;
+        this.lengthOfWire = lengthOfWire;
+        this.diameterOfWire = diameterOfWire;
+        this.startTemperatureOfWire = startTemperatureOfWire;
+        this.material = material;
 
-        task = new CopperWire(dropShadowForWire, amperage, lengthOfWire, startTemperatureOfWire, diameterOfWire, material);
-        currentTemperatureLabel.textProperty().bind(task.messageProperty());
-
-        task.setOnFailed(workerStateEvent -> {
-            setErrorMessage(task.getException().getMessage(), messageInputData);
+        this.setOnFailed(workerStateEvent -> {
+            setErrorMessage(this.getException().getMessage(), messageInputData);
             dropWire();
         });
 
-        Thread thread = new Thread(task);
-        thread.setDaemon(true);
-        thread.start();
-
-        return task;
     }
+
+
+    @Override
+    protected Void call() throws WireException {
+        setWireHeight(diameterOfWire, wireRectangle);
+
+        double currentTemperature = startTemperatureOfWire;
+
+        ErrorCheckInputData errorCheckInputData;
+
+        double thermalConductivity = calculateThermalConductivity();
+
+        Temperature temperature = new Temperature();
+
+        while (true) {
+            errorCheckInputData = Checker.checkData(currentTemperature, amperage, diameterOfWire, lengthOfWire, material);
+
+            if (errorCheckInputData == ErrorCheckInputData.ALL_IS_WELL) {
+                setDropShadowForWire(currentTemperature);
+            } else {
+                updateMessage(String.valueOf(currentTemperature));
+
+                if (errorCheckInputData == ErrorCheckInputData.ERROR_TEMPERATURE_OF_WIRE_IS_TO_ABOVE) {
+                    throw new WireException(errorCheckInputData.getMessage() + "(макс: " + material.getMaxTemperature() + ")");
+                } else {
+                    throw new WireException(errorCheckInputData.getMessage());
+                }
+            }
+
+            if (this.isCancelled()) {
+                break;
+            }
+
+            currentTemperature = temperature.calculateTemperature(thermalConductivity, diameterOfWire, lengthOfWire, material, amperage, startTemperatureOfWire);
+
+            updateMessage(String.valueOf(currentTemperature));
+
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+//                System.out.println("YEE");
+            }
+        }
+        return null;
+    }
+
+
+    private void setDropShadowForWire(double currentTemperature) {
+        double newRadius;
+        Color color;
+
+        if (currentTemperature >= 0) {
+            newRadius = 50f / 1085f * currentTemperature;
+
+            int redColorValue = (int) (255f / 1085f * currentTemperature);
+            color = Color.rgb(redColorValue, 0, 0, 1);
+        } else {
+            if (currentTemperature < 0) {
+                newRadius = Math.abs(50f / 273.15f * currentTemperature);
+                int blueColorValue = (int) Math.abs(255f / 273.15f * currentTemperature);
+
+                color = Color.rgb(0, 0, blueColorValue, 1);
+            } else {
+                newRadius = 2;
+                color = Color.rgb(10, 0, 0, 1);
+            }
+        }
+
+        dropShadowForWire.setRadius(newRadius);
+        dropShadowForWire.setColor(color);
+    }
+
+    private double calculateThermalConductivity() {
+        double thermalConductivity = 401;
+
+        if (startTemperatureOfWire >= 125 && startTemperatureOfWire < 225) {
+            thermalConductivity = 400;
+        }
+
+        if (startTemperatureOfWire >= 225) {
+            thermalConductivity = 398;
+        }
+        return thermalConductivity;
+    }
+
 
     private void dropWire() {
         System.out.println("YEE");
-
     }
 
 

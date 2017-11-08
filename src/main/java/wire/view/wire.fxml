@@ -1,19 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.effect.DropShadow?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.shape.Rectangle?>
-<?import javafx.scene.text.Font?>
-
+<?import javafx.scene.text.*?>
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700"
       prefWidth="1200" stylesheets="/wire/view/wire.css" xmlns="http://javafx.com/javafx/8.0.121"
       xmlns:fx="http://javafx.com/fxml/1" fx:controller="wire.controllers.Controller">
@@ -43,9 +36,9 @@
             <ColumnConstraints maxWidth="20.0" minWidth="20.0" prefWidth="100.0"/>
             <ColumnConstraints maxWidth="20.0" minWidth="20.0" prefWidth="100.0"/>
             <ColumnConstraints maxWidth="100.0" minWidth="20.0" prefWidth="100.0"/>
-            <ColumnConstraints maxWidth="20.0" minWidth="20.0" prefWidth="200.0"/>
+            <ColumnConstraints maxWidth="30.0" minWidth="20.0" prefWidth="200.0"/>
 
-            <ColumnConstraints maxWidth="50.0" minWidth="20.0" prefWidth="100.0"/>
+            <ColumnConstraints maxWidth="80.0" minWidth="20.0" prefWidth="100.0"/>
         </columnConstraints>
         <rowConstraints>
             <RowConstraints maxHeight="20.0" minHeight="20.0"/>
@@ -183,6 +176,34 @@
         <Button onAction="#calculateButton" prefWidth="100" text="Вычислить" GridPane.columnIndex="7"
                 GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="CENTER"/>
 
+
+        <HBox GridPane.columnIndex="6" GridPane.rowIndex="3" alignment="CENTER_RIGHT">
+            <GridPane.margin>
+                <Insets left="5"/>
+            </GridPane.margin>
+            <Label text="T">
+                <font>
+                    <Font size="17"/>
+                </font>
+            </Label>
+            <VBox>
+                <Label alignment="BOTTOM_RIGHT" text=" ">
+                    <font>
+                        <Font size="8.0"/>
+                    </font>
+                </Label>
+                <Label alignment="BOTTOM_RIGHT" text="провод">
+                    <font>
+                        <Font size="8.0"/>
+                    </font>
+                </Label>
+            </VBox>
+            <Label text="=">
+                <font>
+                    <Font size="17"/>
+                </font>
+            </Label>
+        </HBox>
 
         <Label fx:id="currentTemperatureLabel" GridPane.columnIndex="7" GridPane.rowIndex="3">
             <font>

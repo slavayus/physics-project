@@ -57,8 +57,16 @@ public class Controller {
     private Task<Void> task;
 
     private void drawWire() {
-        Wire wire = new Wire(task);
-        task = wire.drawWire(dropShadowForWire, startTemperatureOfWire, amperage, diameterOfWire, lengthOfWire, currentTemperatureLabel, wireRectangle, messageInputData, PhysicsConstants.COPPER);
+        if (task != null) {
+            task.cancel();
+        }
+
+        task = new Wire(dropShadowForWire, amperage, lengthOfWire, startTemperatureOfWire, diameterOfWire, PhysicsConstants.COPPER, wireRectangle, messageInputData);
+        currentTemperatureLabel.textProperty().bind(task.messageProperty());
+
+        Thread thread = new Thread(task);
+        thread.setDaemon(true);
+        thread.start();
     }
 
     private ErrorTransferInputData transferInputData() {
