@@ -1,10 +1,18 @@
 package wire.logic;
 
 import javafx.concurrent.Task;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.effect.DropShadow;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import wire.model.Main;
+
+import java.io.IOException;
 
 public class Wire extends Task<Void> {
 
@@ -28,7 +36,11 @@ public class Wire extends Task<Void> {
 
         this.setOnFailed(workerStateEvent -> {
             setErrorMessage(this.getException().getMessage(), messageInputData);
-            dropWire();
+            try {
+                dropWire();
+            } catch (IOException e) {
+                System.out.println("YEE");
+            }
         });
 
     }
@@ -118,10 +130,30 @@ public class Wire extends Task<Void> {
     }
 
 
-    private void dropWire() {
-        System.out.println("YEE");
-    }
+    private void dropWire() throws IOException {
+        int maxWaterDrops = 150;
 
+        Pane root = FXMLLoader.load(Wire.class.getResource("../view/wire.fxml"));
+
+        short windowWidth = (short) wireRectangle.getScene().getWindow().getWidth();
+        short windowHeight = (short) (wireRectangle.getScene().getWindow().getHeight() - 240);
+
+        VBox vBox = (VBox) root.getChildren().get(0);
+        System.out.println(vBox.getHeight());
+        System.out.println(((VBox) (vBox.getChildren().get(0))).getMaxHeight());
+        System.out.println(((VBox) (vBox.getChildren().get(0))).getHeight());
+        GridPane gridPane = (GridPane) vBox.getChildren().get(2);
+        System.out.println(gridPane.getHeight());
+
+        Main.rootStage.setScene(new Scene(root));
+        for (int i = 0; i < maxWaterDrops; i++) {
+            WaterDrop waterDrop = new WaterDrop(windowWidth, windowHeight);
+            waterDrop.animate();
+            root.getChildren().add(waterDrop.getImageView());
+        }
+
+
+    }
 
     private void setErrorMessage(String errorMessage, Label messageInputData) {
         messageInputData.setStyle("-fx-text-fill: red");
