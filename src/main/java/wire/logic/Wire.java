@@ -1,18 +1,16 @@
 package wire.logic;
 
 import javafx.concurrent.Task;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.effect.DropShadow;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import wire.model.Main;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Wire extends Task<Void> {
 
@@ -23,6 +21,7 @@ public class Wire extends Task<Void> {
     private final double diameterOfWire;
     private final double startTemperatureOfWire;
     private final PhysicsConstants material;
+    private static final List<WaterDrop> waterDrops = new ArrayList<>();
 
 
     public Wire(DropShadow dropShadowForWire, double amperage, double lengthOfWire, double startTemperatureOfWire, double diameterOfWire, PhysicsConstants material, Rectangle wireRectangle, Label messageInputData) {
@@ -131,27 +130,25 @@ public class Wire extends Task<Void> {
 
 
     private void dropWire() throws IOException {
-        int maxWaterDrops = 150;
 
-        Pane root = FXMLLoader.load(Wire.class.getResource("../view/wire.fxml"));
+        int maxWaterDrops = 150;
+        Pane rootNode = (Pane) Main.rootStage.getScene().getRoot();
 
         short windowWidth = (short) wireRectangle.getScene().getWindow().getWidth();
-        short windowHeight = (short) (wireRectangle.getScene().getWindow().getHeight() - 240);
+        short windowHeight = (short) (wireRectangle.getScene().getWindow().getHeight());
 
-        VBox vBox = (VBox) root.getChildren().get(0);
-        System.out.println(vBox.getHeight());
-        System.out.println(((VBox) (vBox.getChildren().get(0))).getMaxHeight());
-        System.out.println(((VBox) (vBox.getChildren().get(0))).getHeight());
-        GridPane gridPane = (GridPane) vBox.getChildren().get(2);
-        System.out.println(gridPane.getHeight());
-
-        Main.rootStage.setScene(new Scene(root));
-        for (int i = 0; i < maxWaterDrops; i++) {
-            WaterDrop waterDrop = new WaterDrop(windowWidth, windowHeight);
-            waterDrop.animate();
-            root.getChildren().add(waterDrop.getImageView());
+        if (waterDrops.size() != maxWaterDrops) {
+            waterDrops.clear();
+            for (int i = 0; i < maxWaterDrops; i++) {
+                WaterDrop waterDrop = new WaterDrop(windowWidth, windowHeight);
+                waterDrops.add(waterDrop);
+                rootNode.getChildren().add(waterDrop.getImageView());
+            }
         }
 
+        waterDrops.forEach(WaterDrop::moveToStart);
+
+        waterDrops.forEach(WaterDrop::animate);
 
     }
 

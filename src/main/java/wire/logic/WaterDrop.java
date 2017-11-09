@@ -9,14 +9,14 @@ class WaterDrop {
     private short positionY;
 
     WaterDrop(double windowWidth, short windowHeight) {
-        this.windowHeight = windowHeight;
-        short positionX = (short) (Math.random() * (windowWidth-15));
-        positionY = (short) - (Math.random() * 800);
+        this.windowHeight = (short) (windowHeight - 240);
+
+        short positionX = (short) (Math.random() * (windowWidth - 15));
+
         this.imageView = new ImageView(WaterDrop.class.getResource("../water.png").toString());
+        imageView.setX(positionX);
         imageView.setFitWidth(15);
         imageView.setFitHeight(15);
-        imageView.setX(positionX);
-        imageView.setTranslateY(positionY);
     }
 
     private boolean move() {
@@ -41,5 +41,10 @@ class WaterDrop {
                 }
             }
         }.start();
+    }
+
+    void moveToStart() {
+        positionY = (short) -(Math.random() * 800);
+        imageView.setTranslateY(positionY);
     }
 }
