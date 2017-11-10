@@ -4,7 +4,7 @@ public enum ErrorCheckInputData {
     ERROR_AMPERAGE_IS_TO_ABOVE {
         @Override
         public String getMessage() {
-            return "Сила тока выше допустимого";
+            return "Сила тока выше допустимой";
         }
     },
     ERROR_LENGTH_OF_WIRE {

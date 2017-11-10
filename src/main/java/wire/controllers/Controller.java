@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.effect.DropShadow;
+import javafx.scene.shape.Arc;
 import javafx.scene.shape.Rectangle;
 import wire.logic.*;
 

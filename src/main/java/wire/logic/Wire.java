@@ -3,14 +3,12 @@ package wire.logic;
 import javafx.concurrent.Task;
 import javafx.scene.control.Label;
 import javafx.scene.effect.DropShadow;
-import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import wire.model.Main;
+import wire.logic.DropWire.Destroy;
+import wire.logic.DropWire.WaterDrop;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Wire extends Task<Void> {
 
@@ -21,7 +19,6 @@ public class Wire extends Task<Void> {
     private final double diameterOfWire;
     private final double startTemperatureOfWire;
     private final PhysicsConstants material;
-    private static final List<WaterDrop> waterDrops = new ArrayList<>();
 
 
     public Wire(DropShadow dropShadowForWire, double amperage, double lengthOfWire, double startTemperatureOfWire, double diameterOfWire, PhysicsConstants material, Rectangle wireRectangle, Label messageInputData) {
@@ -130,26 +127,8 @@ public class Wire extends Task<Void> {
 
 
     private void dropWire() throws IOException {
-
-        int maxWaterDrops = 150;
-        Pane rootNode = (Pane) Main.rootStage.getScene().getRoot();
-
-        short windowWidth = (short) wireRectangle.getScene().getWindow().getWidth();
-        short windowHeight = (short) (wireRectangle.getScene().getWindow().getHeight());
-
-        if (waterDrops.size() != maxWaterDrops) {
-            waterDrops.clear();
-            for (int i = 0; i < maxWaterDrops; i++) {
-                WaterDrop waterDrop = new WaterDrop(windowWidth, windowHeight);
-                waterDrops.add(waterDrop);
-                rootNode.getChildren().add(waterDrop.getImageView());
-            }
-        }
-
-        waterDrops.forEach(WaterDrop::moveToStart);
-
-        waterDrops.forEach(WaterDrop::animate);
-
+        Destroy destroy = new WaterDrop();
+        destroy.destroyWire();
     }
 
     private void setErrorMessage(String errorMessage, Label messageInputData) {
