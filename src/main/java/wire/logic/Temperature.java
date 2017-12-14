@@ -1,5 +1,7 @@
 package wire.logic;
 
+import wire.logic.constants.PhysicsConstants;
+
 import java.util.Date;
 
 import static java.lang.StrictMath.PI;
@@ -14,7 +16,7 @@ class Temperature {
 
     double calculateTemperature(double thermalConductivity, double diameterOfWire, double lengthOfWire, PhysicsConstants material, double amperage, double startTemperatureOfWire) {
         double crossSectionalArea = (PI * pow(diameterOfWire, 2)) / 4;
-        double weight = crossSectionalArea * lengthOfWire * material.getDensityOfCopper();
+        double weight = crossSectionalArea * lengthOfWire * material.getDensity();
         double surfaceArea = PI * diameterOfWire * lengthOfWire;
         long duration = new Date().getTime() / 1000 - date;
 
@@ -22,7 +24,7 @@ class Temperature {
 
         double first = pow(amperage, 2) * resistance * duration;
         double second = thermalConductivity * surfaceArea * duration;
-        double third = weight * material.getSpecificHeatOfCopper();
+        double third = weight * material.getSpecificHeat();
         return startTemperatureOfWire + Math.abs(first / (third + second));
     }
 

@@ -1,4 +1,4 @@
-package wire.logic;
+package wire.logic.constants;
 
 public enum ErrorCheckInputData {
     ERROR_AMPERAGE_IS_TO_ABOVE {
@@ -16,7 +16,7 @@ public enum ErrorCheckInputData {
     ERROR_TEMPERATURE_OF_WIRE_IS_TO_ABOVE {
         @Override
         public String getMessage() {
-            return "Температура проводника выше допустимого";
+            return "Температура проводника выше допустимой";
         }
     },
     ALL_IS_WELL {
@@ -34,7 +34,7 @@ public enum ErrorCheckInputData {
     ERROR_TEMPERATURE_OF_WIRE_IS_TO_LOW {
         @Override
         public String getMessage() {
-            return "Температура проводника слишком низкая(мин: -273.15)";
+            return "Температура проводника слишком низкая";
         }
     },
     ERROR_AMPERAGE_IS_TOO_LOW {

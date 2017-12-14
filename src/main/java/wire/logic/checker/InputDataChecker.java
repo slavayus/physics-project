@@ -1,14 +1,17 @@
-package wire.logic;
+package wire.logic.checker;
+
+import wire.logic.constants.ErrorCheckInputData;
+import wire.logic.constants.PhysicsConstants;
 
 import static java.lang.StrictMath.PI;
 import static java.lang.StrictMath.pow;
 import static java.lang.StrictMath.sqrt;
 
-class Checker {
-    private Checker() {
+public class InputDataChecker {
+    private InputDataChecker() {
     }
 
-    static ErrorCheckInputData checkData(double temperatureOfWire, double amperage, double diameterOfWire, double lengthOfWire, PhysicsConstants material) {
+    public static ErrorCheckInputData checkData(double temperatureOfWire, double amperage, double diameterOfWire, double lengthOfWire, PhysicsConstants material) {
         ErrorCheckInputData errorCheckInputData = ErrorCheckInputData.ALL_IS_WELL;
         int thermalConductivity = getThermalConductivity(temperatureOfWire);
         double continuousAdmissibleAmperage = sqrt((thermalConductivity * ((PI * pow(diameterOfWire, 2)) / 4) * material.getMaxTemperature()) / (5));

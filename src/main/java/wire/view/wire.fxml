@@ -55,7 +55,20 @@
                 <ColumnConstraints maxWidth="100.0" minWidth="20.0" prefWidth="100.0"/>
                 <ColumnConstraints maxWidth="30.0" minWidth="20.0" prefWidth="200.0"/>
 
+                <ColumnConstraints maxWidth="60.0" minWidth="20.0" prefWidth="100.0"/>
+                <ColumnConstraints maxWidth="100.0" minWidth="20.0" prefWidth="100.0"/>
                 <ColumnConstraints maxWidth="80.0" minWidth="20.0" prefWidth="100.0"/>
+                <ColumnConstraints maxWidth="700.0" minWidth="0.0" prefWidth="100.0"/>
+                <ColumnConstraints maxWidth="0.0" minWidth="0.0" prefWidth="100.0"/>
+                <ColumnConstraints  minWidth="20.0" prefWidth="290.0"/>
+                <ColumnConstraints maxWidth="20.0" minWidth="20.0" prefWidth="100.0"/>
+                <ColumnConstraints maxWidth="0.0" minWidth="0.0" prefWidth="100.0"/>
+                <ColumnConstraints maxWidth="80.0" minWidth="20.0" prefWidth="100.0"/>
+                <ColumnConstraints maxWidth="80.0" minWidth="20.0" prefWidth="100.0"/>
+                <ColumnConstraints maxWidth="70.0" minWidth="20.0" prefWidth="100.0"/>
+                <ColumnConstraints maxWidth="20.0" minWidth="20.0" prefWidth="100.0"/>
+                <ColumnConstraints maxWidth="80.0" minWidth="20.0" prefWidth="100.0"/>
+                <ColumnConstraints maxWidth="40.0" minWidth="20.0" prefWidth="100.0"/>
                 <ColumnConstraints/>
             </columnConstraints>
             <rowConstraints>
@@ -75,13 +88,13 @@
             <Label text="I" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1"
                    GridPane.valignment="CENTER">
                 <font>
-                    <Font size="17"/>
+                    <Font size="13"/>
                 </font>
             </Label>
             <Label text="=" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1"
                    GridPane.valignment="CENTER">
                 <font>
-                    <Font size="17"/>
+                    <Font size="13"/>
                 </font>
             </Label>
             <TextField fx:id="amperageTextField" styleClass="textField" text="2" GridPane.columnIndex="4"
@@ -89,7 +102,7 @@
             <Label text="А" GridPane.columnIndex="5" GridPane.halignment="LEFT" GridPane.rowIndex="1"
                    GridPane.valignment="CENTER">
                 <font>
-                    <Font size="17"/>
+                    <Font size="13"/>
                 </font>
             </Label>
 
@@ -97,13 +110,13 @@
             <Label text="L" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3"
                    GridPane.valignment="CENTER">
                 <font>
-                    <Font size="17"/>
+                    <Font size="13"/>
                 </font>
             </Label>
             <Label text="=" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3"
                    GridPane.valignment="CENTER">
                 <font>
-                    <Font size="17"/>
+                    <Font size="13"/>
                 </font>
             </Label>
             <TextField fx:id="lengthOfWireTextField" styleClass="textField" text="20" GridPane.columnIndex="4"
@@ -111,7 +124,7 @@
             <Label text="м" GridPane.columnIndex="5" GridPane.halignment="LEFT" GridPane.rowIndex="3"
                    GridPane.valignment="CENTER">
                 <font>
-                    <Font size="17"/>
+                    <Font size="13"/>
                 </font>
             </Label>
 
@@ -122,7 +135,7 @@
                 </GridPane.margin>
                 <Label text="T">
                     <font>
-                        <Font size="17"/>
+                        <Font size="13"/>
                     </font>
                 </Label>
                 <VBox>
@@ -141,7 +154,7 @@
             <Label text="=" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="5"
                    GridPane.valignment="CENTER">
                 <font>
-                    <Font size="17"/>
+                    <Font size="13"/>
                 </font>
             </Label>
             <TextField fx:id="temperatureOfWireTextField" styleClass="textField" text="18" GridPane.columnIndex="4"
@@ -156,7 +169,7 @@
                 </VBox>
                 <Label text="C">
                     <font>
-                        <Font size="17"/>
+                        <Font size="13"/>
                     </font>
                 </Label>
             </HBox>
@@ -165,13 +178,13 @@
             <Label text="d" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="7"
                    GridPane.valignment="CENTER">
                 <font>
-                    <Font size="17"/>
+                    <Font size="13"/>
                 </font>
             </Label>
             <Label text="=" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="7"
                    GridPane.valignment="CENTER">
                 <font>
-                    <Font size="17"/>
+                    <Font size="13"/>
                 </font>
             </Label>
             <TextField fx:id="diameterOfWireTextField" styleClass="textField" text="0.05" GridPane.columnIndex="4"
@@ -179,14 +192,14 @@
             <Label text="м" GridPane.columnIndex="5" GridPane.halignment="LEFT" GridPane.rowIndex="7"
                    GridPane.valignment="CENTER">
                 <font>
-                    <Font size="17"/>
+                    <Font size="13"/>
                 </font>
             </Label>
 
 
-            <Label fx:id="messageInputData" GridPane.columnIndex="1" GridPane.columnSpan="7" GridPane.rowIndex="9">
+            <Label fx:id="messageInputData" GridPane.columnIndex="1" GridPane.columnSpan="10" GridPane.rowIndex="9">
                 <font>
-                    <Font size="17"/>
+                    <Font size="13"/>
                 </font>
             </Label>
 
@@ -201,7 +214,7 @@
                 </GridPane.margin>
                 <Label text="T">
                     <font>
-                        <Font size="17"/>
+                        <Font size="13"/>
                     </font>
                 </Label>
                 <VBox>
@@ -218,18 +231,213 @@
                 </VBox>
                 <Label text="=">
                     <font>
-                        <Font size="17"/>
+                        <Font size="13"/>
                     </font>
                 </Label>
             </HBox>
 
-            <Label fx:id="currentTemperatureLabel" GridPane.columnIndex="7" GridPane.rowIndex="3">
+            <Label fx:id="currentTemperatureLabel" GridPane.columnIndex="7" GridPane.rowIndex="3"
+                   GridPane.columnSpan="3">
                 <font>
-                    <Font size="17"/>
+                    <Font size="13"/>
                 </font>
             </Label>
 
-        </GridPane>
 
+            <HBox GridPane.columnIndex="11" GridPane.rowIndex="1" alignment="CENTER_RIGHT">
+                <GridPane.margin>
+                    <Insets left="5"/>
+                </GridPane.margin>
+                <Label text="T">
+                    <font>
+                        <Font size="13"/>
+                    </font>
+                </Label>
+                <VBox>
+                    <Label alignment="BOTTOM_RIGHT" text=" ">
+                        <font>
+                            <Font size="8.0"/>
+                        </font>
+                    </Label>
+                    <Label alignment="BOTTOM_RIGHT" text="max">
+                        <font>
+                            <Font size="8.0"/>
+                        </font>
+                    </Label>
+                </VBox>
+            </HBox>
+            <Label text="=" GridPane.columnIndex="12" GridPane.halignment="CENTER" GridPane.rowIndex="1"
+                   GridPane.valignment="CENTER">
+                <font>
+                    <Font size="13"/>
+                </font>
+            </Label>
+            <TextField fx:id="maxTemperatureOfWireTextField" styleClass="textField" text="1085"
+                       GridPane.columnIndex="14"
+                       GridPane.rowIndex="1"/>
+            <HBox GridPane.columnIndex="15" GridPane.rowIndex="1">
+                <VBox>
+                    <Label alignment="TOP_RIGHT" text="o">
+                        <font>
+                            <Font size="8.0"/>
+                        </font>
+                    </Label>
+                </VBox>
+                <Label text="C">
+                    <font>
+                        <Font size="13"/>
+                    </font>
+                </Label>
+            </HBox>
+
+            <HBox GridPane.columnIndex="11" GridPane.rowIndex="3" alignment="CENTER_RIGHT">
+                <GridPane.margin>
+                    <Insets left="5"/>
+                </GridPane.margin>
+                <Label text="T">
+                    <font>
+                        <Font size="13"/>
+                    </font>
+                </Label>
+                <VBox>
+                    <Label alignment="BOTTOM_RIGHT" text=" ">
+                        <font>
+                            <Font size="8.0"/>
+                        </font>
+                    </Label>
+                    <Label alignment="BOTTOM_RIGHT" text="min">
+                        <font>
+                            <Font size="8.0"/>
+                        </font>
+                    </Label>
+                </VBox>
+            </HBox>
+            <Label text="=" GridPane.columnIndex="12" GridPane.halignment="CENTER" GridPane.rowIndex="3"
+                   GridPane.valignment="CENTER">
+                <font>
+                    <Font size="13"/>
+                </font>
+            </Label>
+            <TextField fx:id="minTemperatureOfWireTextField" styleClass="textField" text="-273.15"
+                       GridPane.columnIndex="14"
+                       GridPane.rowIndex="3"/>
+            <HBox GridPane.columnIndex="15" GridPane.rowIndex="3">
+                <VBox>
+                    <Label alignment="TOP_RIGHT" text="o">
+                        <font>
+                            <Font size="8.0"/>
+                        </font>
+                    </Label>
+                </VBox>
+                <Label text="C">
+                    <font>
+                        <Font size="13"/>
+                    </font>
+                </Label>
+            </HBox>
+
+            <Label text="Удельная теплоемкоесть" GridPane.columnIndex="11" GridPane.halignment="RIGHT"
+                   GridPane.rowIndex="5"
+                   GridPane.valignment="CENTER">
+                <font>
+                    <Font size="13"/>
+                </font>
+            </Label>
+            <Label text="=" GridPane.columnIndex="12" GridPane.halignment="CENTER" GridPane.rowIndex="5"
+                   GridPane.valignment="CENTER">
+                <font>
+                    <Font size="13"/>
+                </font>
+            </Label>
+            <TextField fx:id="specificHeat" styleClass="textField" text="0.381" GridPane.columnIndex="14"
+                       GridPane.rowIndex="5"/>
+            <Label text="кДж/(кг*К)" GridPane.columnIndex="15" GridPane.halignment="LEFT" GridPane.rowIndex="5"
+                   GridPane.valignment="CENTER">
+                <font>
+                    <Font size="13"/>
+                </font>
+            </Label>
+
+            <Label text="R при 20 градусах" GridPane.columnIndex="11" GridPane.halignment="RIGHT" GridPane.rowIndex="7"
+                   GridPane.valignment="CENTER">
+                <font>
+                    <Font size="13"/>
+                </font>
+            </Label>
+            <Label text="=" GridPane.columnIndex="12" GridPane.halignment="CENTER" GridPane.rowIndex="7"
+                   GridPane.valignment="CENTER">
+                <font>
+                    <Font size="13"/>
+                </font>
+            </Label>
+            <TextField fx:id="resistanceIn20Degrees" styleClass="textField" text="1.72E-08" GridPane.columnIndex="14"
+                       GridPane.rowIndex="7"/>
+            <Label text="Ом" GridPane.columnIndex="15" GridPane.halignment="LEFT" GridPane.rowIndex="7"
+                   GridPane.valignment="CENTER">
+                <font>
+                    <Font size="13"/>
+                </font>
+            </Label>
+
+            <Label text='Температурный коэффициент сопротивления' GridPane.columnIndex="11" GridPane.halignment="RIGHT" GridPane.rowIndex="9"
+                   GridPane.valignment="CENTER">
+                <font>
+                    <Font size="13"/>
+                </font>
+            </Label>
+            <Label text="=" GridPane.columnIndex="12" GridPane.halignment="CENTER" GridPane.rowIndex="9"
+                   GridPane.valignment="CENTER">
+                <font>
+                    <Font size="13"/>
+                </font>
+            </Label>
+            <TextField fx:id="temperatureCoefficientOfResistance" styleClass="textField" text="0.00393" GridPane.columnIndex="14"
+                       GridPane.rowIndex="9"/>
+            <HBox GridPane.columnIndex="15" GridPane.rowIndex="9">
+                <Label text="K">
+                    <font>
+                        <Font size="13"/>
+                    </font>
+                </Label>
+                <VBox>
+                    <Label alignment="TOP_RIGHT" text="-1">
+                        <font>
+                            <Font size="9.0"/>
+                        </font>
+                    </Label>
+                </VBox>
+            </HBox>
+
+            <Label text="Плотность" GridPane.columnIndex="16" GridPane.halignment="RIGHT" GridPane.rowIndex="1"
+                   GridPane.valignment="CENTER">
+                <font>
+                    <Font size="13"/>
+                </font>
+            </Label>
+            <Label text="=" GridPane.columnIndex="17" GridPane.halignment="CENTER" GridPane.rowIndex="1"
+                   GridPane.valignment="CENTER">
+                <font>
+                    <Font size="13"/>
+                </font>
+            </Label>
+            <TextField fx:id="density" styleClass="textField" text="8.92" GridPane.columnIndex="18"
+                       GridPane.rowIndex="1"/>
+            <HBox GridPane.columnIndex="19" GridPane.rowIndex="1">
+                <Label text="г/см">
+                    <font>
+                        <Font size="13"/>
+                    </font>
+                </Label>
+                <VBox>
+                    <Label alignment="TOP_RIGHT" text="3">
+                        <font>
+                            <Font size="9.0"/>
+                        </font>
+                    </Label>
+                </VBox>
+            </HBox>
+
+
+        </GridPane>
     </VBox>
 </Pane>

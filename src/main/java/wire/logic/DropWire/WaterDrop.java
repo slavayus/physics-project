@@ -49,7 +49,7 @@ public class WaterDrop implements Destroy {
 
         short windowWidth = (short) Main.rootStage.getScene().getWindow().getWidth();
 
-        this.windowHeight = (short) (Main.rootStage.getScene().getWindow().getHeight() - 240);
+        this.windowHeight = (short) (Main.rootStage.getScene().getWindow().getHeight() - 250);
 
         if (waterDrops.size() != maxWaterDrops) {
             waterDrops.clear();

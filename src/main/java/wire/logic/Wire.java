@@ -7,6 +7,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import wire.logic.DropWire.Destroy;
 import wire.logic.DropWire.WaterDrop;
+import wire.logic.checker.InputDataChecker;
+import wire.logic.constants.ErrorCheckInputData;
+import wire.logic.constants.PhysicsConstants;
 
 import java.io.IOException;
 
@@ -55,7 +58,7 @@ public class Wire extends Task<Void> {
         Temperature temperature = new Temperature();
 
         while (true) {
-            errorCheckInputData = Checker.checkData(currentTemperature, amperage, diameterOfWire, lengthOfWire, material);
+            errorCheckInputData = InputDataChecker.checkData(currentTemperature, amperage, diameterOfWire, lengthOfWire, material);
 
             if (errorCheckInputData == ErrorCheckInputData.ALL_IS_WELL) {
                 setDropShadowForWire(currentTemperature);
@@ -65,7 +68,11 @@ public class Wire extends Task<Void> {
                 if (errorCheckInputData == ErrorCheckInputData.ERROR_TEMPERATURE_OF_WIRE_IS_TO_ABOVE) {
                     throw new WireException(errorCheckInputData.getMessage() + "(макс: " + material.getMaxTemperature() + ")");
                 } else {
-                    throw new WireException(errorCheckInputData.getMessage());
+                    if (errorCheckInputData == ErrorCheckInputData.ERROR_TEMPERATURE_OF_WIRE_IS_TO_LOW) {
+                        throw new WireException(errorCheckInputData.getMessage() + "(мин: " + material.getMinTemperature() + ")");
+                    } else {
+                        throw new WireException(errorCheckInputData.getMessage());
+                    }
                 }
             }
 

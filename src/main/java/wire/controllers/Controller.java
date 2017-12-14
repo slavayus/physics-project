@@ -5,9 +5,13 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.effect.DropShadow;
-import javafx.scene.shape.Arc;
 import javafx.scene.shape.Rectangle;
 import wire.logic.*;
+import wire.logic.checker.PhysicsConstantsChecker;
+import wire.logic.constants.ErrorCheckPhysicsConstants;
+import wire.logic.constants.ErrorTransferInputData;
+import wire.logic.constants.ErrorTransferPhysicsConstants;
+import wire.logic.constants.PhysicsConstants;
 
 public class Controller {
 
@@ -35,6 +39,24 @@ public class Controller {
     @FXML
     public Label currentTemperatureLabel;
 
+    @FXML
+    public TextField maxTemperatureOfWireTextField;
+
+    @FXML
+    public TextField minTemperatureOfWireTextField;
+
+    @FXML
+    public TextField specificHeat;
+
+    @FXML
+    public TextField resistanceIn20Degrees;
+
+    @FXML
+    public TextField temperatureCoefficientOfResistance;
+
+    @FXML
+    public TextField density;
+
     private double amperage;
     private double lengthOfWire;
     private double startTemperatureOfWire;
@@ -46,10 +68,20 @@ public class Controller {
 
     public void calculateButton() {
         ErrorTransferInputData errorTransferInputData = transferInputData();
+        ErrorTransferPhysicsConstants errorTransferPhysicsConstants = initializePhysicsConstants();
 
         if (errorTransferInputData == ErrorTransferInputData.ALL_IS_WELL) {
-            setGoodMessage(errorTransferInputData.getMessage());
-            drawWire();
+            if (errorTransferPhysicsConstants == ErrorTransferPhysicsConstants.ALL_IS_WELL) {
+                ErrorCheckPhysicsConstants errorCheckPhysicsConstants = PhysicsConstantsChecker.checkData(PhysicsConstants.COPPER);
+                if (ErrorCheckPhysicsConstants.ALL_IS_WELL == errorCheckPhysicsConstants) {
+                    setGoodMessage(errorTransferPhysicsConstants.getMessage());
+                    drawWire();
+                } else {
+                    setErrorMessage(errorCheckPhysicsConstants.getMessage());
+                }
+            } else {
+                setErrorMessage(errorTransferPhysicsConstants.getMessage());
+            }
         } else {
             setErrorMessage(errorTransferInputData.getMessage());
         }
@@ -68,6 +100,48 @@ public class Controller {
         Thread thread = new Thread(task);
         thread.setDaemon(true);
         thread.start();
+    }
+
+    private ErrorTransferPhysicsConstants initializePhysicsConstants() {
+        ErrorTransferPhysicsConstants errorTransferPhysicsConstants = ErrorTransferPhysicsConstants.ALL_IS_WELL;
+
+        try {
+            PhysicsConstants.COPPER.setMaxTemperature(Double.parseDouble(maxTemperatureOfWireTextField.getText()));
+        } catch (Exception ex) {
+            errorTransferPhysicsConstants = ErrorTransferPhysicsConstants.ERROR_MAX_TEMPERATURE;
+        }
+
+        try {
+            PhysicsConstants.COPPER.setMinTemperature(Double.parseDouble(minTemperatureOfWireTextField.getText()));
+        } catch (Exception ex) {
+            errorTransferPhysicsConstants = ErrorTransferPhysicsConstants.ERROR_MIN_TEMPERATURE;
+        }
+
+        try {
+            PhysicsConstants.COPPER.setSpecificHeat(Double.parseDouble(specificHeat.getText()));
+        } catch (Exception ex) {
+            errorTransferPhysicsConstants = ErrorTransferPhysicsConstants.ERROR_SPECIFIC_HEAT;
+        }
+
+        try {
+            PhysicsConstants.COPPER.setResistanceIn20Degrees(Double.parseDouble(resistanceIn20Degrees.getText()));
+        } catch (Exception ex) {
+            errorTransferPhysicsConstants = ErrorTransferPhysicsConstants.ERROR_RESISTANCE_IN_20_DEGREES;
+        }
+
+        try {
+            PhysicsConstants.COPPER.setTemperatureCoefficientOfResistance(Double.parseDouble(temperatureCoefficientOfResistance.getText()));
+        } catch (Exception ex) {
+            errorTransferPhysicsConstants = ErrorTransferPhysicsConstants.ERROR_TEMPERATURE_COEFFICIENT_OF_RESISTANCE;
+        }
+
+        try {
+            PhysicsConstants.COPPER.setDensity(Double.parseDouble(density.getText()));
+        } catch (Exception ex) {
+            errorTransferPhysicsConstants = ErrorTransferPhysicsConstants.ERROR_DENSITY;
+        }
+
+        return errorTransferPhysicsConstants;
     }
 
     private ErrorTransferInputData transferInputData() {

@@ -1,4 +1,4 @@
-package wire.logic;
+package wire.logic.constants;
 
 public enum ErrorTransferInputData {
     ERROR_AMPERAGE {
