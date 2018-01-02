@@ -12,7 +12,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         rootStage = primaryStage;
-        Parent root = FXMLLoader.load(Main.class.getResource("../view/wire.fxml"));
+        Parent root = FXMLLoader.load(Main.class.getResource("/wire/view/wire.fxml"));
         primaryStage.setResizable(false);
         primaryStage.setTitle("Проводник");
         primaryStage.setScene(new Scene(root));
